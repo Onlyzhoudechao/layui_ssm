@@ -13,7 +13,7 @@ public class BasicCommons {
 	public String generalPrimaryKey() {
 		return UUID.randomUUID().toString();
 	}
-	
+	//注释
 	
 	public static final String KEY_SHA = "SHA";
 
