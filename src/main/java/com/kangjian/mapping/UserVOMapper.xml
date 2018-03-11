@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangjian.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.kangjian.domain.User" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_CODE" property="userCode" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="PHOTO" property="photo" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="E_MAIL" property="eMail" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="CHAR" />
+    <result column="AGE" property="age" jdbcType="CHAR" />
+    <result column="ISLOCKED" property="islocked" jdbcType="CHAR" />
+    <result column="USERROLE" property="userrole" jdbcType="CHAR" />
+    <result column="CHANGEDATE" property="changedate" jdbcType="CHAR" />
+    <result column="LAST_PWD_MODIFY" property="lastPwdModify" jdbcType="CHAR" />
+    <result column="TEMPVAR1" property="tempvar1" jdbcType="VARCHAR" />
+    <result column="TEMPVAR2" property="tempvar2" jdbcType="VARCHAR" />
+    <result column="TEMPVAR3" property="tempvar3" jdbcType="VARCHAR" />
+    <result column="TEMPVAR4" property="tempvar4" jdbcType="VARCHAR" />
+    <result column="TEMPVAR5" property="tempvar5" jdbcType="VARCHAR" />
+    <result column="TEMPVAR6" property="tempvar6" jdbcType="VARCHAR" />
+    <result column="TEMPVAR7" property="tempvar7" jdbcType="VARCHAR" />
+    <result column="TEMPVAR8" property="tempvar8" jdbcType="VARCHAR" />
+    <result column="TEMPVAR9" property="tempvar9" jdbcType="VARCHAR" />
+    <result column="TEMPVAR10" property="tempvar10" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_CODE, USER_NAME, USER_PASSWORD, PHOTO, TELEPHONE, QQ, WECHAT, E_MAIL, ADDRESS, 
+    GENDER, AGE, ISLOCKED, USERROLE, CHANGEDATE, LAST_PWD_MODIFY, TEMPVAR1, TEMPVAR2, 
+    TEMPVAR3, TEMPVAR4, TEMPVAR5, TEMPVAR6, TEMPVAR7, TEMPVAR8, TEMPVAR9, TEMPVAR10
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMaxUserCode" resultType="java.lang.String"  >
+    select MAX(USER_CODE)+1
+    from PUB_USER
+  </select>
+  <select id="selectByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_USER
+    where USER_CODE = #{userCode,jdbcType=VARCHAR}
+  </select>
+ <select id="selectByUserCodeAndPWD" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_USER
+    where USER_CODE = #{userCode,jdbcType=VARCHAR} and USER_PASSWORD = #{userPassword,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_USER
+    where E_MAIL = #{eMail,jdbcType=VARCHAR} 
+  </select>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_USER
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PUB_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kangjian.domain.User" >
+    insert into PUB_USER (ID, USER_CODE, USER_NAME, 
+      USER_PASSWORD, PHOTO, TELEPHONE, 
+      QQ, WECHAT, E_MAIL, 
+      ADDRESS, GENDER, AGE, ISLOCKED, 
+      USERROLE, CHANGEDATE, LAST_PWD_MODIFY, 
+      TEMPVAR1, TEMPVAR2, TEMPVAR3, 
+      TEMPVAR4, TEMPVAR5, TEMPVAR6, 
+      TEMPVAR7, TEMPVAR8, TEMPVAR9, 
+      TEMPVAR10)
+    values (#{id,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{age,jdbcType=CHAR}, #{islocked,jdbcType=CHAR}, 
+      #{userrole,jdbcType=CHAR}, #{changedate,jdbcType=CHAR}, #{lastPwdModify,jdbcType=CHAR}, 
+      #{tempvar1,jdbcType=VARCHAR}, #{tempvar2,jdbcType=VARCHAR}, #{tempvar3,jdbcType=VARCHAR}, 
+      #{tempvar4,jdbcType=VARCHAR}, #{tempvar5,jdbcType=VARCHAR}, #{tempvar6,jdbcType=VARCHAR}, 
+      #{tempvar7,jdbcType=VARCHAR}, #{tempvar8,jdbcType=VARCHAR}, #{tempvar9,jdbcType=VARCHAR}, 
+      #{tempvar10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kangjian.domain.User" >
+    insert into PUB_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD,
+      </if>
+      <if test="photo != null" >
+        PHOTO,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="wechat != null" >
+        WECHAT,
+      </if>
+      <if test="eMail != null" >
+        E_MAIL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED,
+      </if>
+      <if test="userrole != null" >
+        USERROLE,
+      </if>
+      <if test="changedate != null" >
+        CHANGEDATE,
+      </if>
+      <if test="lastPwdModify != null" >
+        LAST_PWD_MODIFY,
+      </if>
+      <if test="tempvar1 != null" >
+        TEMPVAR1,
+      </if>
+      <if test="tempvar2 != null" >
+        TEMPVAR2,
+      </if>
+      <if test="tempvar3 != null" >
+        TEMPVAR3,
+      </if>
+      <if test="tempvar4 != null" >
+        TEMPVAR4,
+      </if>
+      <if test="tempvar5 != null" >
+        TEMPVAR5,
+      </if>
+      <if test="tempvar6 != null" >
+        TEMPVAR6,
+      </if>
+      <if test="tempvar7 != null" >
+        TEMPVAR7,
+      </if>
+      <if test="tempvar8 != null" >
+        TEMPVAR8,
+      </if>
+      <if test="tempvar9 != null" >
+        TEMPVAR9,
+      </if>
+      <if test="tempvar10 != null" >
+        TEMPVAR10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=CHAR},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=CHAR},
+      </if>
+      <if test="userrole != null" >
+        #{userrole,jdbcType=CHAR},
+      </if>
+      <if test="changedate != null" >
+        #{changedate,jdbcType=CHAR},
+      </if>
+      <if test="lastPwdModify != null" >
+        #{lastPwdModify,jdbcType=CHAR},
+      </if>
+      <if test="tempvar1 != null" >
+        #{tempvar1,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar2 != null" >
+        #{tempvar2,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar3 != null" >
+        #{tempvar3,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar4 != null" >
+        #{tempvar4,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar5 != null" >
+        #{tempvar5,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar6 != null" >
+        #{tempvar6,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar7 != null" >
+        #{tempvar7,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar8 != null" >
+        #{tempvar8,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar9 != null" >
+        #{tempvar9,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar10 != null" >
+        #{tempvar10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kangjian.domain.User" >
+    update PUB_USER
+    <set >
+      <if test="userCode != null" >
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        PHOTO = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=CHAR},
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED = #{islocked,jdbcType=CHAR},
+      </if>
+      <if test="userrole != null" >
+        USERROLE = #{userrole,jdbcType=CHAR},
+      </if>
+      <if test="changedate != null" >
+        CHANGEDATE = #{changedate,jdbcType=CHAR},
+      </if>
+      <if test="lastPwdModify != null" >
+        LAST_PWD_MODIFY = #{lastPwdModify,jdbcType=CHAR},
+      </if>
+      <if test="tempvar1 != null" >
+        TEMPVAR1 = #{tempvar1,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar2 != null" >
+        TEMPVAR2 = #{tempvar2,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar3 != null" >
+        TEMPVAR3 = #{tempvar3,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar4 != null" >
+        TEMPVAR4 = #{tempvar4,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar5 != null" >
+        TEMPVAR5 = #{tempvar5,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar6 != null" >
+        TEMPVAR6 = #{tempvar6,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar7 != null" >
+        TEMPVAR7 = #{tempvar7,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar8 != null" >
+        TEMPVAR8 = #{tempvar8,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar9 != null" >
+        TEMPVAR9 = #{tempvar9,jdbcType=VARCHAR},
+      </if>
+      <if test="tempvar10 != null" >
+        TEMPVAR10 = #{tempvar10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kangjian.domain.User" >
+    update PUB_USER
+    set USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      PHOTO = #{photo,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=CHAR},
+      AGE = #{age,jdbcType=CHAR},
+      ISLOCKED = #{islocked,jdbcType=CHAR},
+      USERROLE = #{userrole,jdbcType=CHAR},
+      CHANGEDATE = #{changedate,jdbcType=CHAR},
+      LAST_PWD_MODIFY = #{lastPwdModify,jdbcType=CHAR},
+      TEMPVAR1 = #{tempvar1,jdbcType=VARCHAR},
+      TEMPVAR2 = #{tempvar2,jdbcType=VARCHAR},
+      TEMPVAR3 = #{tempvar3,jdbcType=VARCHAR},
+      TEMPVAR4 = #{tempvar4,jdbcType=VARCHAR},
+      TEMPVAR5 = #{tempvar5,jdbcType=VARCHAR},
+      TEMPVAR6 = #{tempvar6,jdbcType=VARCHAR},
+      TEMPVAR7 = #{tempvar7,jdbcType=VARCHAR},
+      TEMPVAR8 = #{tempvar8,jdbcType=VARCHAR},
+      TEMPVAR9 = #{tempvar9,jdbcType=VARCHAR},
+      TEMPVAR10 = #{tempvar10,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

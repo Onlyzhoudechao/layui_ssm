@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangjian.dao.OnlineUserMapper" >
+  <resultMap id="BaseResultMap" type="com.kangjian.domain.OnlineUser" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="LOGIN_TIME" property="loginTime" jdbcType="CHAR" />
+    <result column="LOGIN_IP" property="loginIp" jdbcType="VARCHAR" />
+    <result column="TEMP_VAR1" property="tempVar1" jdbcType="VARCHAR" />
+    <result column="TEMP_VAR2" property="tempVar2" jdbcType="VARCHAR" />
+    <result column="TEMP_VAR3" property="tempVar3" jdbcType="VARCHAR" />
+    <result column="TEMP_VAR4" property="tempVar4" jdbcType="VARCHAR" />
+    <result column="TEMP_VAR5" property="tempVar5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, LOGIN_TIME, LOGIN_IP, TEMP_VAR1, TEMP_VAR2, TEMP_VAR3, TEMP_VAR4, TEMP_VAR5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PUB_ONLINEUSER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PUB_ONLINEUSER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kangjian.domain.OnlineUser" >
+    insert into PUB_ONLINEUSER (ID, USER_ID, LOGIN_TIME, 
+      LOGIN_IP, TEMP_VAR1, TEMP_VAR2, 
+      TEMP_VAR3, TEMP_VAR4, TEMP_VAR5
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{loginTime,jdbcType=CHAR}, 
+      #{loginIp,jdbcType=VARCHAR}, #{tempVar1,jdbcType=VARCHAR}, #{tempVar2,jdbcType=VARCHAR}, 
+      #{tempVar3,jdbcType=VARCHAR}, #{tempVar4,jdbcType=VARCHAR}, #{tempVar5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kangjian.domain.OnlineUser" >
+    insert into PUB_ONLINEUSER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="loginTime != null" >
+        LOGIN_TIME,
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP,
+      </if>
+      <if test="tempVar1 != null" >
+        TEMP_VAR1,
+      </if>
+      <if test="tempVar2 != null" >
+        TEMP_VAR2,
+      </if>
+      <if test="tempVar3 != null" >
+        TEMP_VAR3,
+      </if>
+      <if test="tempVar4 != null" >
+        TEMP_VAR4,
+      </if>
+      <if test="tempVar5 != null" >
+        TEMP_VAR5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=CHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar1 != null" >
+        #{tempVar1,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar2 != null" >
+        #{tempVar2,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar3 != null" >
+        #{tempVar3,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar4 != null" >
+        #{tempVar4,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar5 != null" >
+        #{tempVar5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kangjian.domain.OnlineUser" >
+    update PUB_ONLINEUSER
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        LOGIN_TIME = #{loginTime,jdbcType=CHAR},
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar1 != null" >
+        TEMP_VAR1 = #{tempVar1,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar2 != null" >
+        TEMP_VAR2 = #{tempVar2,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar3 != null" >
+        TEMP_VAR3 = #{tempVar3,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar4 != null" >
+        TEMP_VAR4 = #{tempVar4,jdbcType=VARCHAR},
+      </if>
+      <if test="tempVar5 != null" >
+        TEMP_VAR5 = #{tempVar5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kangjian.domain.OnlineUser" >
+    update PUB_ONLINEUSER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      LOGIN_TIME = #{loginTime,jdbcType=CHAR},
+      LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      TEMP_VAR1 = #{tempVar1,jdbcType=VARCHAR},
+      TEMP_VAR2 = #{tempVar2,jdbcType=VARCHAR},
+      TEMP_VAR3 = #{tempVar3,jdbcType=VARCHAR},
+      TEMP_VAR4 = #{tempVar4,jdbcType=VARCHAR},
+      TEMP_VAR5 = #{tempVar5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
